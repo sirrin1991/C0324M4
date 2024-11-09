@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Danh sách học viên</h1>
+<a th:href="@{/show-create-form}">Thêm mới học viên</a>
+<p th:text="${msg}"></p>
+<table>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Ngày Sinh</th>
+            <th>Lương</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr th:each="s, loop : ${list}">
+            <td th:text="${loop.count}"></td>
+            <td th:text="${s.name}"></td>
+            <td th:text="${#temporals.format(s.dob, 'dd-MM-yyyy')}"></td>
+            <td th:text="${#numbers.formatInteger(s.salary,3,'COMMA')}"></td>
+<!--            <td th:if="${s.salary > 100000}">-->
+<!--                Giàu-->
+<!--            </td>-->
+<!--            <td th:if="${s.salary <= 100000}">-->
+<!--                Nghèo-->
+<!--            </td>-->
+<!--            <td th:switch="${s.salary}">-->
+<!--                <span th:case="${1000000}">Giàu</span>-->
+<!--                <span th:case="${100000}">Nghèo</span>-->
+<!--                <span th:case="*">Quá nghèo</span>-->
+<!--            </td>-->
+        </tr>
+    </tbody>
+</table>
+</body>
+</html>

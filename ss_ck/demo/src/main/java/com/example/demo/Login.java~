@@ -1,0 +1,26 @@
+package com.example.demo;
+
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.CookieValue;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+@RequestMapping("/cookie")
+public class Login {
+    @GetMapping("/set")
+    public String setCookie(HttpServletResponse response) {
+        Cookie cookie = new Cookie("user", "JohnDoe");
+        cookie.setMaxAge(24 * 60 * 60); // 1 ngày
+        cookie.setPath("/"); // Cookie có hiệu lực cho toàn bộ ứng dụng
+        response.addCookie(cookie);
+        return "Cookie 'user' đã được thiết lập!";
+    }
+
+    @GetMapping("/get")
+    public String getCookie(@CookieValue(value = "user", defaultValue = "Guest") String user) {
+        return "Chào mừng, " + user + "!";
+    }
+}

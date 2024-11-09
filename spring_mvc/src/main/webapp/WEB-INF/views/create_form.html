@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Thêm mới học viên</h1>
+<form th:action="@{save-student}" method="post" th:object="${student}">
+    Tên: <input type="text" th:field="*{name}">
+    Ngày sinh: <input type="date" th:field="*{dob}">
+    Lương: <input type="number" th:field="*{salary}">
+    <input type="submit" value="Thêm mới">
+</form>
+</body>
+</html>

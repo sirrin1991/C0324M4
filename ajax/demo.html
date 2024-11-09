@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Danh sách sản phẩm</h1>
+<button id="btn">Tải lại danh sách</button>
+<table>
+    <thead>
+        <tr>
+            <th>STT</th>
+            <th>Tên</th>
+            <th>Giá</th>
+            <th>Loại sản phẩm</th>
+            <th>Xóa</th>
+        </tr>
+    </thead>
+    <tbody id="tbody">
+
+    </tbody>
+</table>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.js"></script>
+<script>
+    const renderData = (data) => {
+        let str =``;
+        let count = 0;
+        for(let p of data){
+            str += `<tr>
+                        <td>${++count}</td>
+                        <td>${p.name}</td>
+                        <td>${p.price}</td>
+                        <td>${p.category.name}</td>
+                        <td><button>Xóa</button></td>
+                    </tr>`
+        }
+        $("#tbody").html(str);
+    }
+    const reload = () => {
+        $.ajax({
+            url: "http://localhost:8080/api/show-list",
+            type: "GET", // HTTP ???
+            dataType: "JSON",
+            success: (data) => {
+                renderData(data);
+            },
+            error: (err) => {
+                console.log(err.status);
+            }
+        })
+    }
+    $("document").ready(
+        $("#btn").click(reload)
+    )
+
+
+</script>
+</body>
+</html>
